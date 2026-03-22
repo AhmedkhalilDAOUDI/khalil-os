@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const ANTHROPIC_API = "http://localhost:3001/api/messages";
+const ANTHROPIC_API = "https://khalil-os-production.up.railway.app/api/messages";
 
 // ── Defaults ───────────────────────────────────────────────────────────────
 const DEFAULT_TARGETS = { kcal: 2100, protein: 180, carbs: 200, fat: 60 };
