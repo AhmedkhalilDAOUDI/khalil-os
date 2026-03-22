@@ -10,10 +10,15 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Read key from .env
-const envPath = path.join(__dirname, '.env')
-const envContent = fs.readFileSync(envPath, 'utf8')
-const API_KEY = envContent.match(/GROQ_API_KEY=(.+)/)?.[1]?.trim()
+// Read key from environment variable (Railway) or .env file (local)
+let API_KEY = process.env.GROQ_API_KEY
+if (!API_KEY) {
+  try {
+    const envPath = path.join(__dirname, '.env')
+    const envContent = fs.readFileSync(envPath, 'utf8')
+    API_KEY = envContent.match(/GROQ_API_KEY=(.+)/)?.[1]?.trim()
+  } catch(e) {}
+}
 
 if (!API_KEY) {
   console.error('No API key found in .env')
